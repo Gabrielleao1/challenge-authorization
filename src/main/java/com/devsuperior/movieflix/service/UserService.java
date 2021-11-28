@@ -29,6 +29,12 @@ public class UserService implements UserDetailsService{
 	private AuthService authService;
 	
 	@Transactional(readOnly = true)
+	public UserDTO findUser() {
+		User entity = authService.authenticated();
+		return new UserDTO(entity);
+	}
+	
+	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		
 		authService.validateSelfOrAdmin(id);
